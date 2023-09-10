@@ -126,4 +126,8 @@ class ZakladkaPytaniaActivity : AppCompatActivity() {
         val alertDialog = alertDialogBuilder.create()
         alertDialog.show()
     }
+
+    fun telephoneClicked(view: View) {}
+    fun peopleClicked(view: View) {}
+    fun halfClicked(view: View) {}
 }

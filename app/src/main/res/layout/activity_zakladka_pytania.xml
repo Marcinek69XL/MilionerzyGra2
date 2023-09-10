@@ -54,16 +54,19 @@
 
                 <Button
                     android:layout_width="60dp"
+                    android:onClick="peopleClicked"
                     android:background="@drawable/people"
                     android:layout_height="60dp"></Button>
                 <Button
                     android:layout_marginLeft="30dp"
+                    android:onClick="telephoneClicked"
                     android:layout_marginRight="30dp"
                     android:background="@drawable/telephone"
                     android:layout_width="60dp"
                     android:layout_height="60dp"></Button>
                 <Button
                     android:layout_width="60dp"
+                    android:onClick="halfClicked"
                     android:background="@drawable/half1"
                     android:layout_height="60dp"></Button>
 
