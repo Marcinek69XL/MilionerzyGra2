@@ -41,30 +41,63 @@
 
         </androidx.cardview.widget.CardView>
 
-        <ImageView
-            android:id="@+id/imageView2"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="293dp"
-            android:layout_weight="1"
-            android:scaleType="fitCenter"
-            android:scaleX="1"
-            android:scaleY="1"
-            android:src="@drawable/milionerzy_logo" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:layout_width="60dp"
+                    android:background="@drawable/people"
+                    android:layout_height="60dp"></Button>
+                <Button
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/telephone"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"></Button>
+                <Button
+                    android:layout_width="60dp"
+                    android:background="@drawable/half1"
+                    android:layout_height="60dp"></Button>
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="match_parent"
+                android:layout_height="229dp"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:scaleX="1"
+                android:scaleY="1"
+                android:src="@drawable/milionerzy_logo" />
+
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="162dp"
+            android:layout_height="match_parent"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="10dp"
+                android:gravity="bottom"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <Button
                     android:id="@+id/btnOdpA"
+                    android:layout_marginBottom="5dp"
                     android:onClick="btnOdpA_Clicked"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
@@ -79,16 +112,18 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="5dp"
                 android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:gravity="bottom"
+                android:layout_width="wrap_content"
                 android:orientation="vertical">
 
                 <Button
                     android:id="@+id/btnOdpB"
                     android:layout_width="match_parent"
                     android:onClick="btnOdpB_Clicked"
+                    android:layout_marginBottom="5dp"
                     android:layout_height="80dp"
                     android:text="B" />
 
