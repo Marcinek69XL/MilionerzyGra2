@@ -11,7 +11,7 @@ import com.example.milionerzygra2.entities.PytanieEntity
 import com.example.milionerzygra2.seeders.PoziomTrudnosciSeeder
 import com.example.milionerzygra2.seeders.PytanieSeeder
 
-@Database(entities = [PytanieEntity::class, PoziomTrudnosciEntity::class], version = 2, exportSchema = false)
+@Database(entities = [PytanieEntity::class, PoziomTrudnosciEntity::class], version = 3, exportSchema = false)
 abstract class MyDatabase : RoomDatabase() {
     abstract fun pytanieDao(): PytanieDao
     abstract fun poziomTrudnosciDao(): PoziomTrudnosciDao // Dodaj DAO dla nowej encji
@@ -38,6 +38,7 @@ abstract class MyDatabase : RoomDatabase() {
 
                 if (instance.poziomTrudnosciDao().getAllPoziomyTrunosci().isEmpty()) {
                     // Jeśli baza danych jest pusta, wypełnij ją danymi
+
                     val seeder = PoziomTrudnosciSeeder();
                     val poziomy = seeder.getPoziomyTrudnosci();
 

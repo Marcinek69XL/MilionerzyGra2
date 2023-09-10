@@ -8,6 +8,7 @@
     android:orientation="vertical"
     android:background="@color/black"
     android:padding="16dp"
+    tools:context=".uicontrollers.MainActivity"
     android:gravity="center">
 
     <!-- Pole na zdjęcie -->
@@ -26,6 +27,7 @@
         android:id="@+id/buttonStartGame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="zacznijGreClicked"
         android:text="Zacznij grę"
         android:layout_marginTop="16dp"/>
 

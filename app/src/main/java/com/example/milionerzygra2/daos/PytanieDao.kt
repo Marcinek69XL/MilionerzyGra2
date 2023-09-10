@@ -15,4 +15,7 @@ interface PytanieDao {
 
     @Insert
     fun insertAll(pytania: List<PytanieEntity>)
+
+    @Query("SELECT * FROM pytania WHERE id = :pytanieId")
+    fun getPytanieById(pytanieId: Int): PytanieEntity
 }

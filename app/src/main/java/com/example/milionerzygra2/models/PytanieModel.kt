@@ -7,5 +7,6 @@ data class PytanieModel(
     val odpBTresc: String,
     val odpCTresc: String,
     val odpDTresc: String,
-    val poprawna: Char // Zakładam, że poprawna odpowiedź jest oznaczona literą 'A', 'B', 'C' lub 'D'
+    val poprawna: PoprawnaOdpEnum, // Zakładam, że poprawna odpowiedź jest oznaczona literą 'A', 'B', 'C' lub 'D'
+    val poziom: PoziomTrudnosciEnum
 )
