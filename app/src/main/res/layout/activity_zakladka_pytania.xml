@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".uicontrollers.ZakladkaPytaniaActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:orientation="vertical"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="213dp"
+            android:orientation="horizontal"
+            app:cardBackgroundColor="#13106D"
+            app:cardCornerRadius="40dp">
+
+            <TextView
+                android:id="@+id/textPytanie"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="20dp"
+                android:fontFamily="sans-serif"
+                android:gravity="center|top"
+                android:text="Jaki jest najwspanialszy kraj na świecie, bazując na rankingu z lat 2055-2023"
+                android:textColor="@color/white"
+                android:textSize="24sp"></TextView>
+
+        </androidx.cardview.widget.CardView>
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="293dp"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:scaleX="1"
+            android:scaleY="1"
+            android:src="@drawable/milionerzy_logo" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="162dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btnOdpA"
+                    android:onClick="btnOdpA_Clicked"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:text="A" />
+
+                <Button
+                    android:id="@+id/btnOdpC"
+                    android:onClick="btnOdpC_Clicked"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:text="C" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btnOdpB"
+                    android:layout_width="match_parent"
+                    android:onClick="btnOdpB_Clicked"
+                    android:layout_height="80dp"
+                    android:text="B" />
+
+                <Button
+                    android:id="@+id/btnOdpD"
+                    android:layout_width="match_parent"
+                    android:onClick="btnOdpD_Clicked"
+                    android:layout_height="80dp"
+                    android:text="D" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
