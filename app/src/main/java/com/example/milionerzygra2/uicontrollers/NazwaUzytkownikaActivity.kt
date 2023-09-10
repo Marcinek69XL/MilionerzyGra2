@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import com.example.milionerzygra2.Gra
 import com.example.milionerzygra2.R
 import com.example.milionerzygra2.databinding.ActivityMainBinding
 import com.example.milionerzygra2.databinding.ActivityNazwaUzytkownikaBinding
@@ -20,6 +21,9 @@ class NazwaUzytkownikaActivity : AppCompatActivity() {
     }
 
     fun startGameClicked(view: View) {
+        val nazwaUzyt = binding.usernameEditText.text.toString();
+        Gra.ZacznijGre(nazwaUzyt);
+
         val intent = Intent(this, ZakladkaPytaniaActivity::class.java)
         startActivity(intent);
     }

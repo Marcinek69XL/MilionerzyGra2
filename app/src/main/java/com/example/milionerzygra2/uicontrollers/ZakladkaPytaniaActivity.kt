@@ -1,9 +1,13 @@
 package com.example.milionerzygra2.uicontrollers
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import com.example.milionerzygra2.Gra
+import com.example.milionerzygra2.Gra.Companion.PrzejdzDoNastepnegoEtapu
 import com.example.milionerzygra2.controllers.PytanieController
 import com.example.milionerzygra2.databinding.ActivityZakladkaPytaniaBinding
 import com.example.milionerzygra2.models.PoprawnaOdpEnum
@@ -34,12 +38,92 @@ class ZakladkaPytaniaActivity : AppCompatActivity() {
     }
 
     fun btnOdpC_Clicked(view: View) {
-        if (pytanie.poprawna == PoprawnaOdpEnum.C)
+        if (pytanie.poprawna.equals(PoprawnaOdpEnum.C))
         {
-            Toast.makeText(this.applicationContext, "sialala", Toast.LENGTH_LONG).show();
+            poprawnaOdpowiedz()
+        }
+        else
+        {
+            niepoprawnaOdpowiedz()
         }
     }
-    fun btnOdpA_Clicked(view: View) {}
-    fun btnOdpB_Clicked(view: View) {}
-    fun btnOdpD_Clicked(view: View) {}
+    fun btnOdpA_Clicked(view: View) {
+        if (pytanie.poprawna.equals(PoprawnaOdpEnum.A))
+        {
+            poprawnaOdpowiedz()
+        }
+        else
+        {
+            niepoprawnaOdpowiedz()
+        }
+    }
+    fun btnOdpB_Clicked(view: View) {
+        if (pytanie.poprawna.equals(PoprawnaOdpEnum.B))
+        {
+            poprawnaOdpowiedz()
+        }
+        else
+        {
+            niepoprawnaOdpowiedz()
+        }
+    }
+    fun btnOdpD_Clicked(view: View) {
+        if (pytanie.poprawna.equals(PoprawnaOdpEnum.D))
+        {
+            poprawnaOdpowiedz()
+        }
+        else
+        {
+            niepoprawnaOdpowiedz()
+        }
+    }
+
+    private fun poprawnaOdpowiedz()
+    {
+        Gra.PrzejdzDoNastepnegoEtapu();
+
+        val intent = Intent(this, DobraOdpowiedzActivity::class.java)
+        startActivity(intent);
+    }
+
+    private fun niepoprawnaOdpowiedz()
+    {
+        val intent = Intent(this, ZlaOdpowiedzActivity::class.java)
+        startActivity(intent);
+    }
+
+    override fun onBackPressed()
+    {
+        showExitConfirmationDialog();
+    }
+
+    private fun showExitConfirmationDialog() {
+        val alertDialogBuilder = AlertDialog.Builder(this)
+
+        // Ustaw tytuł komunikatu
+        alertDialogBuilder.setTitle("Czy zakończyć grę i zapisać wynik?")
+
+        // Ustaw treść komunikatu
+        alertDialogBuilder.setMessage("Czy na pewno chcesz zakończyć grę i zapisać wynik?")
+
+        // Dodaj przycisk "Zapisz i zakończ"
+        alertDialogBuilder.setPositiveButton("Zapisz i zakończ") { _, _ ->
+            // Tutaj umieść kod do zapisania wyniku
+            finish() // Zakończ aktywność
+        }
+
+        // Dodaj przycisk "Zakończ"
+        alertDialogBuilder.setNegativeButton("Zakończ") { _, _ ->
+            finish() // Zakończ aktywność bez zapisywania wyniku
+        }
+
+        // Dodaj przycisk "Anuluj"
+        alertDialogBuilder.setNeutralButton("Anuluj") { dialog, _ ->
+            dialog.dismiss() // Anuluj zamknięcie komunikatu
+        }
+
+        // Utwórz i pokaż komunikat
+        val alertDialog = alertDialogBuilder.create()
+        alertDialog.show()
+    }
 }

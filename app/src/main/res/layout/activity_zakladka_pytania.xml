@@ -34,10 +34,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="20dp"
-                android:fontFamily="sans-serif"
                 android:gravity="center|top"
                 android:text="Jaki jest najwspanialszy kraj na świecie, bazując na rankingu z lat 2055-2023"
-                android:textColor="@color/white"
+                android:textColor="@color/moj_bialy"
                 android:textSize="24sp"></TextView>
 
         </androidx.cardview.widget.CardView>

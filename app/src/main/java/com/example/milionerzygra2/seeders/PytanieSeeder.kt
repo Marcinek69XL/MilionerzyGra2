@@ -124,7 +124,7 @@ class PytanieSeeder {
                 odpBTresc = "Kanada",
                 odpCTresc = "Stany Zjednoczone",
                 odpDTresc = "Chiny",
-                poprawna = 'B',
+                poprawna = 'A',
                 poziomTrudnosciId = 1
             )
             // Dodaj więcej przykładowych pytań
