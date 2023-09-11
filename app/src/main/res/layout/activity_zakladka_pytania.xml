@@ -54,11 +54,13 @@
 
                 <Button
                     android:layout_width="60dp"
+                    android:id="@+id/people"
                     android:onClick="peopleClicked"
                     android:background="@drawable/people"
                     android:layout_height="60dp"></Button>
                 <Button
                     android:layout_marginLeft="30dp"
+                    android:id="@+id/telephone"
                     android:onClick="telephoneClicked"
                     android:layout_marginRight="30dp"
                     android:background="@drawable/telephone"
@@ -67,6 +69,7 @@
                 <Button
                     android:layout_width="60dp"
                     android:onClick="halfClicked"
+                    android:id="@+id/half"
                     android:background="@drawable/half1"
                     android:layout_height="60dp"></Button>
 

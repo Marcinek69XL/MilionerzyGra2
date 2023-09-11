@@ -8,6 +8,10 @@ public class Gra
     companion object {
         private var _etapGryKwota = EtapyKwotyEnum._0;
         private var _nazwaUzytkownika = "";
+        private var _dostepnyTelefon = true;
+        private var _dostepnaPublicznosc = true;
+        private var _dostepnePolNaPol = true;
+
 
         public fun KoniecGryDajWygranaIZerujGre() : Int
         {
@@ -56,12 +60,43 @@ public class Gra
         private fun zerujGreZostawUzytkownika()
         {
             _etapGryKwota = EtapyKwotyEnum._0;
+            _dostepnyTelefon = true;
+            _dostepnyTelefon = true;
+            _dostepnyTelefon = true;
         }
 
         public fun PrzejdzDoNastepnegoEtapu() {
             val values = EtapyKwotyEnum.values()
             val index = values.indexOf(_etapGryKwota)
             _etapGryKwota = values[index + 1];
+        }
+
+        public fun CzyMamTelefonDoUzycia() : Boolean
+        {
+            return _dostepnyTelefon;
+        }
+
+        public fun CzyMamPublicznoscDoUzycia() : Boolean
+        {
+            return _dostepnaPublicznosc;
+        }
+
+        public fun CzyMamPolNaPolDoUzycia() : Boolean
+        {
+            return _dostepnePolNaPol;
+        }
+
+        public fun OznaczTelefonJakoUzyty()
+        {
+            _dostepnyTelefon = false;
+        }
+        public fun OznaczPublicznoscJakoUzyty()
+        {
+            _dostepnaPublicznosc = false;
+        }
+        public fun OznaczPolNaPolJakoUzyty()
+        {
+            _dostepnePolNaPol = false;
         }
     }
 }

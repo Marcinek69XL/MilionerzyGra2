@@ -36,10 +36,10 @@ class PytanieController {
                         _dostepnePytaniaLatwe.add(model);
                     }
                     if(model.poziom == PoziomTrudnosciEnum.SREDNIE){
-                        _dostepnePytaniaLatwe.add(model);
+                        _dostepnePytaniaSrednie.add(model);
                     }
                     if(model.poziom == PoziomTrudnosciEnum.TRUDNE){
-                        _dostepnePytaniaLatwe.add(model);
+                        _dostepnePytaniaTrudne.add(model);
                     }
                 }
             }
@@ -55,7 +55,7 @@ class PytanieController {
             val randomIndex = (0 until _dostepnePytaniaSrednie.size).random()
             return _dostepnePytaniaSrednie.removeAt(randomIndex);
         }
-        if (poziom == PoziomTrudnosciEnum.LATWE){
+        if (poziom == PoziomTrudnosciEnum.TRUDNE){
             val randomIndex = (0 until _dostepnePytaniaTrudne.size).random()
             return _dostepnePytaniaTrudne.removeAt(randomIndex);
         }

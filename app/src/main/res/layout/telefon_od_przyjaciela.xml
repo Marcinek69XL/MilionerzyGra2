@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/layout/dialog_telefon_do_przyjaciela.xml -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Treść pytania od przyjaciela -->
+    <TextView
+        android:id="@+id/textViewQuestionFromFriend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Przyjaciel mówi:"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Odpowiedź od przyjaciela -->
+    <TextView
+        android:id="@+id/textViewAnswerFromFriend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="16sp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Przycisk zamykający dialog -->
+    <Button
+        android:id="@+id/buttonCloseDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Zamknij"
+        android:onClick="closeDialog" />
+</LinearLayout>
