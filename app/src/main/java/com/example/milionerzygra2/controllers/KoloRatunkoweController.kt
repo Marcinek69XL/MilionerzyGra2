@@ -1,5 +1,6 @@
 package com.example.milionerzygra2.controllers
 
+import com.example.milionerzygra2.models.OdpEnum
 import com.example.milionerzygra2.models.PoziomTrudnosciEnum
 import com.example.milionerzygra2.models.PytanieModel
 import kotlin.random.Random
@@ -76,20 +77,8 @@ class KoloRatunkoweController {
 
         if (str == PEWNOSC){
             if (losowaLiczba1 < 100){
-                var odp = pytanie.poprawna.name;
-                if (odp == "A"){
-                    return str.replace("<ODP>", pytanie.odpATresc)
-                }
-                if (odp == "B"){
-                    return str.replace("<ODP>", pytanie.odpBTresc)
-                }
-                if (odp == "C"){
-                    return str.replace("<ODP>", pytanie.odpCTresc)
-                }
-                if (odp == "D"){
-                    return str.replace("<ODP>", pytanie.odpDTresc)
-                }
-                throw Exception()
+                var odp = pytanie.poprawna;
+                return DajTrescOdpowiedziIZamien(odp, str, pytanie);
             }
             else
             {
@@ -112,8 +101,8 @@ class KoloRatunkoweController {
 
         if (str == RACZEJ){
             if (losowaLiczba1 < 70){
-                var odp = pytanie.poprawna.name;
-                return str.replace("<ODP>", odp)
+                var odp = pytanie.poprawna;
+                return DajTrescOdpowiedziIZamien(odp, str, pytanie);
             }
             else
             {
@@ -140,5 +129,24 @@ class KoloRatunkoweController {
         }
 
         return NIE_WIEM;
+    }
+
+    private fun DajTrescOdpowiedziIZamien (odpEnum: OdpEnum, str: String, pytanie: PytanieModel) : String
+    {
+        var odp = pytanie.poprawna;
+        if (odp == OdpEnum.A){
+            return str.replace("<ODP>", pytanie.odpATresc)
+        }
+        if (odp == OdpEnum.B){
+            return str.replace("<ODP>", pytanie.odpBTresc)
+        }
+        if (odp == OdpEnum.C){
+            return str.replace("<ODP>", pytanie.odpCTresc)
+        }
+        if (odp == OdpEnum.D){
+            return str.replace("<ODP>", pytanie.odpDTresc)
+        }
+
+        throw Exception();
     }
 }

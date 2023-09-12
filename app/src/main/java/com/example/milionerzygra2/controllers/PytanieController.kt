@@ -4,7 +4,7 @@ import android.content.Context
 import com.example.milionerzygra2.MyDatabase
 import com.example.milionerzygra2.entities.PoziomTrudnosciEntity
 import com.example.milionerzygra2.entities.PytanieEntity
-import com.example.milionerzygra2.models.PoprawnaOdpEnum
+import com.example.milionerzygra2.models.OdpEnum
 import com.example.milionerzygra2.models.PoziomTrudnosciEnum
 import com.example.milionerzygra2.models.PytanieModel
 import kotlinx.coroutines.Dispatchers
@@ -14,12 +14,20 @@ import java.lang.Exception
 
 class PytanieController {
 
-    private lateinit var _dostepnePytaniaLatwe : MutableList<PytanieModel>;
-    private lateinit var _dostepnePytaniaSrednie : MutableList<PytanieModel>;
-    private lateinit var _dostepnePytaniaTrudne : MutableList<PytanieModel>;
+    companion object
+    {
+        private lateinit var _dostepnePytaniaLatwe : MutableList<PytanieModel>;
+        private lateinit var _dostepnePytaniaSrednie : MutableList<PytanieModel>;
+        private lateinit var _dostepnePytaniaTrudne : MutableList<PytanieModel>;
+
+    }
 
 
-    constructor(applicationContext: Context){
+    constructor(applicationContext: Context, resetPytan: Boolean){
+        if(!resetPytan)
+        {
+            return ;
+        }
         _dostepnePytaniaLatwe = mutableListOf()
         _dostepnePytaniaSrednie = mutableListOf()
         _dostepnePytaniaTrudne = mutableListOf()
@@ -49,7 +57,8 @@ class PytanieController {
     {
         if (poziom == PoziomTrudnosciEnum.LATWE){
             val randomIndex = (0 until _dostepnePytaniaLatwe.size).random()
-            return _dostepnePytaniaLatwe.removeAt(randomIndex);
+            var pytanieRemoved =  _dostepnePytaniaLatwe.removeAt(randomIndex);
+            return pytanieRemoved;
         }
         if (poziom == PoziomTrudnosciEnum.SREDNIE){
             val randomIndex = (0 until _dostepnePytaniaSrednie.size).random()
@@ -92,16 +101,16 @@ class PytanieController {
         throw Exception("mapPoziomEntityToModel failed");
     }
 
-    private fun mapPoprawnaEntityToModel(poprawna: Char) : PoprawnaOdpEnum
+    private fun mapPoprawnaEntityToModel(poprawna: Char) : OdpEnum
     {
         if(poprawna == 'A')
-            return PoprawnaOdpEnum.A;
+            return OdpEnum.A;
         if(poprawna == 'B')
-            return PoprawnaOdpEnum.B;
+            return OdpEnum.B;
         if(poprawna == 'C')
-            return PoprawnaOdpEnum.C;
+            return OdpEnum.C;
         if(poprawna == 'D')
-            return PoprawnaOdpEnum.D;
+            return OdpEnum.D;
 
         throw Exception("mapPoprawnaEntityToModel failed");
     }

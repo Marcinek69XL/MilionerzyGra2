@@ -2,21 +2,20 @@ package com.example.milionerzygra2.uicontrollers
 
 import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.view.View.GONE
+import android.view.View.INVISIBLE
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.milionerzygra2.Gra
-import com.example.milionerzygra2.Gra.Companion.PrzejdzDoNastepnegoEtapu
 import com.example.milionerzygra2.R
 import com.example.milionerzygra2.controllers.KoloRatunkoweController
 import com.example.milionerzygra2.controllers.PytanieController
 import com.example.milionerzygra2.databinding.ActivityZakladkaPytaniaBinding
-import com.example.milionerzygra2.models.PoprawnaOdpEnum
+import com.example.milionerzygra2.models.OdpEnum
 import com.example.milionerzygra2.models.PoziomTrudnosciEnum
 import com.example.milionerzygra2.models.PytanieModel
 
@@ -32,17 +31,18 @@ class ZakladkaPytaniaActivity : AppCompatActivity() {
         setContentView(view);
 
         ratunkoweController = KoloRatunkoweController();
+        val czyPierwszePytanie = Gra.CzyToPierwszePytanie();
 
         if (Gra.PokazAktualnaKwoteEtapu() <= 5000){
-            pytanie = PytanieController(this.applicationContext).DajPytanie(PoziomTrudnosciEnum.LATWE);
+            pytanie = PytanieController(this.applicationContext, czyPierwszePytanie).DajPytanie(PoziomTrudnosciEnum.LATWE);
         }
-        if (Gra.PokazAktualnaKwoteEtapu() <= 40000)
+        else if (Gra.PokazAktualnaKwoteEtapu() <= 40000)
         {
-            pytanie = PytanieController(this.applicationContext).DajPytanie(PoziomTrudnosciEnum.SREDNIE);
+            pytanie = PytanieController(this.applicationContext, czyPierwszePytanie).DajPytanie(PoziomTrudnosciEnum.SREDNIE);
         }
         else
         {
-            pytanie = PytanieController(this.applicationContext).DajPytanie(PoziomTrudnosciEnum.TRUDNE);
+            pytanie = PytanieController(this.applicationContext, czyPierwszePytanie).DajPytanie(PoziomTrudnosciEnum.TRUDNE);
         }
 
 
@@ -59,20 +59,20 @@ class ZakladkaPytaniaActivity : AppCompatActivity() {
 
         if (!Gra.CzyMamPolNaPolDoUzycia())
         {
-            binding.half.visibility = GONE;
+            binding.half.visibility = INVISIBLE;
         }
         if (!Gra.CzyMamTelefonDoUzycia())
         {
-            binding.telephone.visibility = GONE;
+            binding.telephone.visibility = INVISIBLE;
         }
         if (!Gra.CzyMamPublicznoscDoUzycia())
         {
-            binding.people.visibility = GONE;
+            binding.people.visibility = INVISIBLE;
         }
     }
 
     fun btnOdpC_Clicked(view: View) {
-        if (pytanie.poprawna.equals(PoprawnaOdpEnum.C))
+        if (pytanie.poprawna.equals(OdpEnum.C))
         {
             poprawnaOdpowiedz()
         }
@@ -82,7 +82,7 @@ class ZakladkaPytaniaActivity : AppCompatActivity() {
         }
     }
     fun btnOdpA_Clicked(view: View) {
-        if (pytanie.poprawna.equals(PoprawnaOdpEnum.A))
+        if (pytanie.poprawna.equals(OdpEnum.A))
         {
             poprawnaOdpowiedz()
         }
@@ -92,7 +92,7 @@ class ZakladkaPytaniaActivity : AppCompatActivity() {
         }
     }
     fun btnOdpB_Clicked(view: View) {
-        if (pytanie.poprawna.equals(PoprawnaOdpEnum.B))
+        if (pytanie.poprawna.equals(OdpEnum.B))
         {
             poprawnaOdpowiedz()
         }
@@ -102,7 +102,7 @@ class ZakladkaPytaniaActivity : AppCompatActivity() {
         }
     }
     fun btnOdpD_Clicked(view: View) {
-        if (pytanie.poprawna.equals(PoprawnaOdpEnum.D))
+        if (pytanie.poprawna.equals(OdpEnum.D))
         {
             poprawnaOdpowiedz()
         }
@@ -164,6 +164,7 @@ class ZakladkaPytaniaActivity : AppCompatActivity() {
     fun telephoneClicked(view: View) {
         if (Gra.CzyMamTelefonDoUzycia()) {
             Gra.OznaczTelefonJakoUzyty();
+            binding.telephone.visibility = INVISIBLE;
 
             // Tworzenie i wyświetlanie dialogu
             val dialog = Dialog(this)
@@ -190,6 +191,68 @@ class ZakladkaPytaniaActivity : AppCompatActivity() {
             dialog.show()
         }
     }
-    fun peopleClicked(view: View) {}
-    fun halfClicked(view: View) {}
+    fun peopleClicked(view: View) {
+        if (Gra.CzyMamPublicznoscDoUzycia())
+        {
+            Gra.OznaczPublicznoscJakoUzyty();
+            binding.people.visibility = INVISIBLE;
+
+            //TODO
+        }
+    }
+    fun halfClicked(view: View) {
+        if (Gra.CzyMamPolNaPolDoUzycia()){
+            Gra.OznaczPolNaPolJakoUzyty();
+            binding.half.visibility = INVISIBLE;
+
+            var poprawna = pytanie.poprawna;
+
+            // Tworzenie listy odpowiedzi z wyłączeniem poprawnej odpowiedzi
+            val dostepneOdpowiedzi = mutableListOf(OdpEnum.A, OdpEnum.B, OdpEnum.C, OdpEnum.D)
+
+            dostepneOdpowiedzi.remove(poprawna)
+
+            // Losowanie dwóch pozostałych odpowiedzi
+            val losoweOdpowiedzi = dostepneOdpowiedzi.shuffled().take(2)
+
+            // Zmiana koloru odpowiedzi na losowe
+            when (losoweOdpowiedzi[0]) {
+                OdpEnum.A -> zmienKolorOdpowiedzi(OdpEnum.A)
+                OdpEnum.B -> zmienKolorOdpowiedzi(OdpEnum.B)
+                OdpEnum.C -> zmienKolorOdpowiedzi(OdpEnum.C)
+                OdpEnum.D -> zmienKolorOdpowiedzi(OdpEnum.D)
+            }
+
+            when (losoweOdpowiedzi[1]) {
+                OdpEnum.A -> zmienKolorOdpowiedzi(OdpEnum.A)
+                OdpEnum.B -> zmienKolorOdpowiedzi(OdpEnum.B)
+                OdpEnum.C -> zmienKolorOdpowiedzi(OdpEnum.C)
+                OdpEnum.D -> zmienKolorOdpowiedzi(OdpEnum.D)
+            }
+        }
+    }
+
+    private fun zmienKolorOdpowiedzi(odpEnum: OdpEnum) {
+        var kolor = Color.RED;
+
+        when (odpEnum) {
+            OdpEnum.A -> {
+                binding.btnOdpA.setTextColor(kolor)
+                binding.btnOdpA.isClickable = false;
+            }
+            OdpEnum.B -> {
+                binding.btnOdpB.setTextColor(kolor)
+                binding.btnOdpB.isClickable = false;
+            }
+            OdpEnum.C -> {
+                binding.btnOdpC.setTextColor(kolor)
+                binding.btnOdpC.isClickable = false;
+            }
+            OdpEnum.D -> {
+                binding.btnOdpD.setTextColor(kolor)
+                binding.btnOdpD.isClickable = false;
+            }
+        }
+
+    }
 }

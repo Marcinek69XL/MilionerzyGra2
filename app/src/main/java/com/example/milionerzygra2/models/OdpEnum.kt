@@ -1,6 +1,6 @@
 package com.example.milionerzygra2.models
 
-enum class PoprawnaOdpEnum {
+enum class OdpEnum {
     A,
     B,
     C,

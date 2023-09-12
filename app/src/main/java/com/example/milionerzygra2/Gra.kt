@@ -61,8 +61,8 @@ public class Gra
         {
             _etapGryKwota = EtapyKwotyEnum._0;
             _dostepnyTelefon = true;
-            _dostepnyTelefon = true;
-            _dostepnyTelefon = true;
+            _dostepnePolNaPol = true;
+            _dostepnaPublicznosc = true;
         }
 
         public fun PrzejdzDoNastepnegoEtapu() {
@@ -97,6 +97,10 @@ public class Gra
         public fun OznaczPolNaPolJakoUzyty()
         {
             _dostepnePolNaPol = false;
+        }
+
+        fun CzyToPierwszePytanie(): Boolean {
+            return _etapGryKwota == EtapyKwotyEnum._0;
         }
     }
 }
