@@ -197,7 +197,33 @@ class ZakladkaPytaniaActivity : AppCompatActivity() {
             Gra.OznaczPublicznoscJakoUzyty();
             binding.people.visibility = INVISIBLE;
 
-            //TODO
+
+            // Tworzenie i wyświetlanie dialogu
+            val dialog = Dialog(this)
+            dialog.setContentView(R.layout.telefon_od_przyjaciela) // uzyjemy ten sam
+
+            // Pobieranie referencji do widoków w dialogu
+            val textViewQuestion = dialog.findViewById<TextView>(R.id.textViewQuestionFromFriend)
+            val textViewAnswer = dialog.findViewById<TextView>(R.id.textViewAnswerFromFriend)
+            val buttonClose = dialog.findViewById<Button>(R.id.buttonCloseDialog)
+
+            // Losowanie odpowiedzi od przyjaciela
+            val glosowanieModel = ratunkoweController.GenerujGlosowaniePublicznosci(pytanie.poprawna, pytanie.poziom);
+
+            // Ustawienie treści dialogu
+            textViewQuestion.text = "Głosowanie publiczności:"
+            textViewAnswer.text = "${pytanie.odpATresc}: ${glosowanieModel.A} ${System.lineSeparator()}" +
+                    "${pytanie.odpBTresc}: ${glosowanieModel.B} ${System.lineSeparator()}" +
+                    "${pytanie.odpCTresc}: ${glosowanieModel.C} ${System.lineSeparator()}" +
+                    "${pytanie.odpDTresc}: ${glosowanieModel.D} ${System.lineSeparator()}";
+
+            // Obsługa zamknięcia dialogu
+            buttonClose.setOnClickListener {
+                dialog.dismiss() // Zamknięcie dialogu po naciśnięciu przycisku
+            }
+
+            // Wyświetlenie dialogu
+            dialog.show()
         }
     }
     fun halfClicked(view: View) {
@@ -253,6 +279,5 @@ class ZakladkaPytaniaActivity : AppCompatActivity() {
                 binding.btnOdpD.isClickable = false;
             }
         }
-
     }
 }

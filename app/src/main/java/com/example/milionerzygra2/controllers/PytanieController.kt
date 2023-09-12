@@ -23,6 +23,7 @@ class PytanieController {
     }
 
 
+    //TODO: DALEJ COS NIE TAK, DALEJ MAM DUBLIKATY PYTAN
     constructor(applicationContext: Context, resetPytan: Boolean){
         if(!resetPytan)
         {

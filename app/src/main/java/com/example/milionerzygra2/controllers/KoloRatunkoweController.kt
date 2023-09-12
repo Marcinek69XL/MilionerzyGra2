@@ -1,5 +1,6 @@
 package com.example.milionerzygra2.controllers
 
+import com.example.milionerzygra2.models.GlosowaniePublicznosciModel
 import com.example.milionerzygra2.models.OdpEnum
 import com.example.milionerzygra2.models.PoziomTrudnosciEnum
 import com.example.milionerzygra2.models.PytanieModel
@@ -148,5 +149,36 @@ class KoloRatunkoweController {
         }
 
         throw Exception();
+    }
+
+    //TODO: JAKAS LEPSZA TA FUNKCJA, BO BOT JAKIES GOWNO STWORZYL CO RANDOMOWE WYNIKI DAJE
+    public fun GenerujGlosowaniePublicznosci(poprawnaOdpowiedz: OdpEnum, poziomTrudnosci: PoziomTrudnosciEnum): GlosowaniePublicznosciModel {
+
+        val procentySuma = 100
+
+        // Wygeneruj losowe procenty dla odpowiedzi A, B, C i D
+        val procentyA = (0..procentySuma).random()
+        val procentyB = (0..(procentySuma - procentyA)).random()
+        val procentyC = (0..(procentySuma - procentyA - procentyB)).random()
+        val procentyD = procentySuma - procentyA - procentyB - procentyC
+
+        // Ustal, która odpowiedź jest poprawna
+        val poprawna: Int = when (poprawnaOdpowiedz) {
+            OdpEnum.A -> procentyA
+            OdpEnum.B -> procentyB
+            OdpEnum.C -> procentyC
+            OdpEnum.D -> procentyD
+            else -> 0
+        }
+
+        // Oblicz procenty dla pozostałych odpowiedzi
+        val sumaPozostale = procentySuma - poprawna
+        val procentyPozostale = when (poziomTrudnosci) {
+            PoziomTrudnosciEnum.LATWE -> (0..sumaPozostale).random()
+            PoziomTrudnosciEnum.SREDNIE -> (0..(sumaPozostale / 2)).random()
+            PoziomTrudnosciEnum.TRUDNE -> (0..(sumaPozostale / 4)).random()
+        }
+
+        return GlosowaniePublicznosciModel(procentyA, procentyB, procentyC, procentyD)
     }
 }
