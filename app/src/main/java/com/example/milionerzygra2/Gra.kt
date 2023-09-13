@@ -31,6 +31,13 @@ public class Gra
             return kwotaWygrana;
         }
 
+        public fun KoniecGryPrzezPoddanieDajWygranaIZerujGre() : Int
+        {
+            var kwota = _etapGryKwota.kwota;
+            zerujGreZostawUzytkownika();
+            return kwota;
+        }
+
         public fun PokazAktualnaKwoteEtapu() : Int
         {
             return _etapGryKwota.kwota

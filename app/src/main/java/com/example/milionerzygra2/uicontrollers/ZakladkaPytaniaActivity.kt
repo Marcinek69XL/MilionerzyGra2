@@ -10,14 +10,18 @@ import android.view.View.INVISIBLE
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.lifecycleScope
 import com.example.milionerzygra2.Gra
 import com.example.milionerzygra2.R
 import com.example.milionerzygra2.controllers.KoloRatunkoweController
 import com.example.milionerzygra2.controllers.PytanieController
+import com.example.milionerzygra2.controllers.WynikController
 import com.example.milionerzygra2.databinding.ActivityZakladkaPytaniaBinding
 import com.example.milionerzygra2.models.OdpEnum
 import com.example.milionerzygra2.models.PoziomTrudnosciEnum
 import com.example.milionerzygra2.models.PytanieModel
+import com.example.milionerzygra2.models.WynikModel
+import kotlinx.coroutines.launch
 
 class ZakladkaPytaniaActivity : AppCompatActivity() {
 
@@ -52,10 +56,10 @@ class ZakladkaPytaniaActivity : AppCompatActivity() {
     private fun zaladujPytanieDoKontrolek(pytanie: PytanieModel) {
         binding.textPytanie.text = pytanie.tresc;
 
-        binding.btnOdpA.text = pytanie.odpATresc;
-        binding.btnOdpB.text = pytanie.odpBTresc;
-        binding.btnOdpC.text = pytanie.odpCTresc;
-        binding.btnOdpD.text = pytanie.odpDTresc;
+        binding.btnOdpA.text = "A." + pytanie.odpATresc;
+        binding.btnOdpB.text = "B." + pytanie.odpBTresc;
+        binding.btnOdpC.text = "C." + pytanie.odpCTresc;
+        binding.btnOdpD.text = "D." + pytanie.odpDTresc;
 
         if (!Gra.CzyMamPolNaPolDoUzycia())
         {
@@ -143,7 +147,16 @@ class ZakladkaPytaniaActivity : AppCompatActivity() {
         // Dodaj przycisk "Zapisz i zakończ"
         alertDialogBuilder.setPositiveButton("Zapisz i zakończ") { _, _ ->
             // Tutaj umieść kod do zapisania wyniku
+            val kwota = Gra.KoniecGryPrzezPoddanieDajWygranaIZerujGre();
+            val wynikModel = WynikModel(kwota, Gra.DajNazweGracza())
+            lifecycleScope.launch {
+                WynikController(this@ZakladkaPytaniaActivity).ZapiszWynik(wynikModel)
+            }
+
             finish() // Zakończ aktywność
+
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
 
         // Dodaj przycisk "Zakończ"
