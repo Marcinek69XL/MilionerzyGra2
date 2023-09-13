@@ -24,11 +24,7 @@ class PytanieController {
 
 
     //TODO: DALEJ COS NIE TAK, DALEJ MAM DUBLIKATY PYTAN
-    constructor(applicationContext: Context, resetPytan: Boolean){
-        if(!resetPytan)
-        {
-            return ;
-        }
+    constructor(applicationContext: Context){
         _dostepnePytaniaLatwe = mutableListOf()
         _dostepnePytaniaSrednie = mutableListOf()
         _dostepnePytaniaTrudne = mutableListOf()

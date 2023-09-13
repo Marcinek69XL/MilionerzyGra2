@@ -29,7 +29,7 @@ class ZlaOdpowiedzActivity : AppCompatActivity() {
         _wynikController = WynikController(this);
 
         var nazwaGracza = Gra.DajNazweGracza();
-        var wynikKwota = Gra.KoniecGryDajWygranaIZerujGre();
+        var wynikKwota = Gra.KoniecGryDajWygranaIZerujGre(this);
 
         _wynik = WynikModel(wynikKwota, nazwaGracza);
 

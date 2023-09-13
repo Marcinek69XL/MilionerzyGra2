@@ -22,7 +22,7 @@ class NazwaUzytkownikaActivity : AppCompatActivity() {
 
     fun startGameClicked(view: View) {
         val nazwaUzyt = binding.usernameEditText.text.toString();
-        Gra.ZacznijGre(nazwaUzyt);
+        Gra.ZacznijGre(nazwaUzyt, this);
 
         val intent = Intent(this, ZakladkaPytaniaActivity::class.java)
         startActivity(intent);

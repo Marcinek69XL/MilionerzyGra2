@@ -37,17 +37,7 @@ class ZakladkaPytaniaActivity : AppCompatActivity() {
         ratunkoweController = KoloRatunkoweController();
         val czyPierwszePytanie = Gra.CzyToPierwszePytanie();
 
-        if (Gra.PokazAktualnaKwoteEtapu() <= 5000){
-            pytanie = PytanieController(this.applicationContext, czyPierwszePytanie).DajPytanie(PoziomTrudnosciEnum.LATWE);
-        }
-        else if (Gra.PokazAktualnaKwoteEtapu() <= 40000)
-        {
-            pytanie = PytanieController(this.applicationContext, czyPierwszePytanie).DajPytanie(PoziomTrudnosciEnum.SREDNIE);
-        }
-        else
-        {
-            pytanie = PytanieController(this.applicationContext, czyPierwszePytanie).DajPytanie(PoziomTrudnosciEnum.TRUDNE);
-        }
+        pytanie = Gra.DajPytanie(this);
 
 
         zaladujPytanieDoKontrolek(pytanie)
@@ -147,7 +137,7 @@ class ZakladkaPytaniaActivity : AppCompatActivity() {
         // Dodaj przycisk "Zapisz i zakończ"
         alertDialogBuilder.setPositiveButton("Zapisz i zakończ") { _, _ ->
             // Tutaj umieść kod do zapisania wyniku
-            val kwota = Gra.KoniecGryPrzezPoddanieDajWygranaIZerujGre();
+            val kwota = Gra.KoniecGryPrzezPoddanieDajWygranaIZerujGre(this);
             val wynikModel = WynikModel(kwota, Gra.DajNazweGracza())
             lifecycleScope.launch {
                 WynikController(this@ZakladkaPytaniaActivity).ZapiszWynik(wynikModel)

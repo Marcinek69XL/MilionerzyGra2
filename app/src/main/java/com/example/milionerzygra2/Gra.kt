@@ -1,6 +1,10 @@
 package com.example.milionerzygra2
 
+import android.content.Context
+import com.example.milionerzygra2.controllers.PytanieController
 import com.example.milionerzygra2.models.EtapyKwotyEnum
+import com.example.milionerzygra2.models.PoziomTrudnosciEnum
+import com.example.milionerzygra2.models.PytanieModel
 import java.lang.Exception
 
 public class Gra
@@ -11,30 +15,31 @@ public class Gra
         private var _dostepnyTelefon = true;
         private var _dostepnaPublicznosc = true;
         private var _dostepnePolNaPol = true;
+        private lateinit var _pytanieController : PytanieController;
 
 
-        public fun KoniecGryDajWygranaIZerujGre() : Int
+        public fun KoniecGryDajWygranaIZerujGre(context: Context) : Int
         {
             var kwotaWygrana = 0;
             if (_etapGryKwota == EtapyKwotyEnum._1000000){
                 kwotaWygrana = EtapyKwotyEnum._1000000.kwota;
             }
-            if (_etapGryKwota.kwota >= EtapyKwotyEnum._40000.kwota){
-                return EtapyKwotyEnum._40000.kwota;
+            else if (_etapGryKwota.kwota >= EtapyKwotyEnum._40000.kwota){
+                kwotaWygrana = EtapyKwotyEnum._40000.kwota;
             }
-            if (_etapGryKwota.kwota >= EtapyKwotyEnum._1000.kwota){
-                return EtapyKwotyEnum._1000.kwota;
+            else if (_etapGryKwota.kwota >= EtapyKwotyEnum._1000.kwota){
+                kwotaWygrana = EtapyKwotyEnum._1000.kwota;
             }
 
-            zerujGreZostawUzytkownika()
+            zerujGreZostawUzytkownika(context)
 
             return kwotaWygrana;
         }
 
-        public fun KoniecGryPrzezPoddanieDajWygranaIZerujGre() : Int
+        public fun KoniecGryPrzezPoddanieDajWygranaIZerujGre(context: Context) : Int
         {
             var kwota = _etapGryKwota.kwota;
-            zerujGreZostawUzytkownika();
+            zerujGreZostawUzytkownika(context);
             return kwota;
         }
 
@@ -58,18 +63,38 @@ public class Gra
                 return null;
             }
         }
-        public fun ZacznijGre(nazwaUzyt: String)
+        public fun ZacznijGre(nazwaUzyt: String, context: Context)
         {
+            _pytanieController = PytanieController(context)
+
             _nazwaUzytkownika = nazwaUzyt;
-            zerujGreZostawUzytkownika()
+            zerujGreZostawUzytkownika(context)
         }
 
-        private fun zerujGreZostawUzytkownika()
+        fun DajPytanie(context: Context): PytanieModel
+        {
+            if (Gra.PokazAktualnaKwoteEtapu() <= 5000)
+            {
+                return _pytanieController.DajPytanie(PoziomTrudnosciEnum.LATWE);
+            }
+            else if (Gra.PokazAktualnaKwoteEtapu() <= 40000)
+            {
+                return _pytanieController.DajPytanie(PoziomTrudnosciEnum.SREDNIE);
+            }
+            else
+            {
+                return _pytanieController.DajPytanie(PoziomTrudnosciEnum.TRUDNE);
+            }
+        }
+
+        private fun zerujGreZostawUzytkownika(context: Context)
         {
             _etapGryKwota = EtapyKwotyEnum._0;
             _dostepnyTelefon = true;
             _dostepnePolNaPol = true;
             _dostepnaPublicznosc = true;
+
+            _pytanieController = PytanieController(context);
         }
 
         public fun PrzejdzDoNastepnegoEtapu() {
