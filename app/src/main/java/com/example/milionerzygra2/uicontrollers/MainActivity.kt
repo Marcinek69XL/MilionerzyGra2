@@ -22,4 +22,9 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, NazwaUzytkownikaActivity::class.java)
         startActivity(intent);
     }
+
+    fun btnWynikiClicked(view: View) {
+        val intent = Intent(this, WynikiActivity::class.java)
+        startActivity(intent);
+    }
 }

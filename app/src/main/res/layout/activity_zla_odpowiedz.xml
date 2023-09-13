@@ -68,9 +68,10 @@
             android:text="Okno menu"
             android:textColor="@color/moj_bialy" />
         <Button
-            android:id="@+id/buttonSaveScore"
+            android:id="@+id/btnSaveScore"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="btnSaveScoreClicked"
             android:text="Zapisz wynik"
             android:textColor="@color/moj_bialy"
             android:layout_marginBottom="16dp" />

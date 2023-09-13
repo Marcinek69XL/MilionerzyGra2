@@ -102,5 +102,10 @@ public class Gra
         fun CzyToPierwszePytanie(): Boolean {
             return _etapGryKwota == EtapyKwotyEnum._0;
         }
+
+        public fun DajNazweGracza() : String
+        {
+            return _nazwaUzytkownika;
+        }
     }
 }

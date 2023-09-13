@@ -2,9 +2,11 @@ package com.example.milionerzygra2.entities
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.Index
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "pytania",
+    indices = [Index(name = "index_poziomTrudnosciId", value = ["poziomTrudnosciId"])],
     foreignKeys = [
         ForeignKey(
             entity = PoziomTrudnosciEntity::class,
