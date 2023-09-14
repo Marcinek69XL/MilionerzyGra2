@@ -19,16 +19,19 @@ class DobraOdpowiedzActivity : AppCompatActivity() {
         binding = ActivityDobraOdpowiedzBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Przekieruj do okna wygrania miliona
+        val nastepnaWybrana = Gra.PokazKwoteNastepnegoPytania();
+        if(nastepnaWybrana == null){
+            val intent = Intent(this, WygralesMilionActivity::class.java)
+            startActivity(intent);
+        }
+
         ustawKontrolki();
     }
 
     private fun ustawKontrolki() {
         val wygranaAktualna = Gra.PokazAktualnaKwoteEtapu();
         val nastepnaWybrana = Gra.PokazKwoteNastepnegoPytania();
-
-        if(nastepnaWybrana == null){
-            // TODO: Koniec gry, wygrales mln, nowa activity
-        }
 
         binding.textViewCurrentWin.text = "Wygrałeś: " + wygranaAktualna;
         binding.textViewNextWin.text = "Następne pytanie o: " + nastepnaWybrana;
